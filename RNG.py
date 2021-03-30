@@ -2,29 +2,35 @@
 #RNG.py
 import random
 import time
+from tqdm import *
 loop = 1
 avg = 0
+count = 0
 #========================#
+
 while loop == 1:
     many = int(input("How many random numbers do you want? "))
     tall = int(input("How large can the number be? "))
     
     highest = 0
     lowest = tall/2
-
-    for x in range(0, many):
-        a = (round(random.uniform(0, tall)))
-        print ("Random number between 0 and", tall, "is:" ,end=" ")
-        print (a)
-        avg = avg + a
-        if highest < a:
-            highest = a
-        if lowest > a:
-            lowest = a
-        time.sleep(0)
-        print("")
+    print("\n")
+    
+    with tqdm(total=many) as pbar:
+        for x in range(0, many):
+            a = (round(random.uniform(0, tall)))
+            count = count + 1
+            avg = avg + a
         
-    avg = avg/many
+            if highest < a:
+                highest = a
+            
+            if lowest > a:
+                lowest = a
+
+            pbar.update(1)
+            
+    avg = round(avg/many)
     range1 = highest - lowest
 
     
@@ -40,4 +46,4 @@ while loop == 1:
 
     for i in range(0, 75):
         print("")
-#========================#
+#============FURRO404============#
